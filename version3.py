@@ -11,18 +11,11 @@ YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 class YouTubeApi():
 
     def load_search_res(self, search_response):
-        videos, channels, playlists = [], [], []
+        videos=[]
         for search_result in search_response.get("items", []):
-            if search_result["id"]["kind"] == "youtube#video":
-              videos.append("{} ({})".format(search_result["snippet"]["title"],
-                                         search_result["id"]["videoId"]))
-            elif search_result["id"]["kind"] == "youtube#channel":
-              channels.append("{} ({})".format(search_result["snippet"]["title"],
-                                           search_result["id"]["channelId"]))
-            elif search_result["id"]["kind"] == "youtube#playlist":
-              playlists.append("{} ({})".format(search_result["snippet"]["title"],
-                                search_result["id"]["playlistId"]))
-
+            search_result["id"]["kind"] == "youtube#video"
+            videos.append("{} https://www.youtube.com/watch?v={}".format(search_result["snippet"]["title"],
+                                         search_result["id"]["videoId"],))
         print("Videos:\n", "\n".join(videos), "\n")
 
     def search_keyword(self):
